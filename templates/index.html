@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Movie Recommendation Chatbot</h1>
+        <p>Tell me what kind of movie you're in the mood for!</p>
+    </header>
+
+    <main>
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                {% for msg in chat_history %}
+                    <div class="message {% if msg.role == 'user' %}user{% else %}bot{% endif %}">
+                        {{ msg.text }}
+                    </div>
+                {% endfor %}
+        </div>
+
+
+            <form id="chat-form" method="POST">
+                <input type="text" name="message" id="message-input" 
+                       placeholder="Describe what you want to watch..."
+                       autocomplete="off" required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </main>
+
+<script>
+  const messagesDiv = document.getElementById('messages');
+  if (messagesDiv) {
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+</script>
+</body>
+</html>
